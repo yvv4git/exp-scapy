@@ -1,0 +1,43 @@
+version: '3.7'
+
+services:
+  scapy:
+    build:
+      context: .
+      dockerfile: docker/scapy.Dockerfile
+    hostname: scapy
+    container_name: exp-scapy
+    image: exp-net-scapy
+    tty: true
+    stdin_open: true
+    volumes:
+      - ./src:/scapy/src
+    networks:
+      net-1:
+        ipv4_address: 10.5.0.2
+    dns:
+      - "8.8.8.8"
+
+  target:
+    build:
+      context: .
+      dockerfile: docker/target.Dockerfile
+    image: exp-net-target
+    hostname: target
+    container_name: exp-target
+    tty: true
+    stdin_open: true
+    networks:
+      net-1:
+        ipv4_address: 10.5.0.3
+    dns:
+      - "8.8.8.8"
+    cap_add:
+      - ALL
+
+networks:
+  net-1:
+    driver: bridge
+    ipam:
+      config:
+        - subnet: 10.5.0.0/24
