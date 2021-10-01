@@ -1,2 +1,7 @@
 # exp-scapy
-Explore scapy
+
+## HOWTO
+````
+ls()        # список протоколво
+lsc()       # список функций
+````
