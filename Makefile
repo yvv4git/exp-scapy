@@ -3,4 +3,4 @@ start:
 	docker exec -it exp-scapy bash
 
 stop:
-	docker-compsoe down
+	docker-compose down
